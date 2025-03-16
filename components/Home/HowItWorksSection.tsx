@@ -1,4 +1,4 @@
-import { BrainCircuit, FileOutput, FileText } from "lucide-react";
+import { BrainCircuit, FileOutput, FileText, MoveRight } from "lucide-react";
 import React, { ReactNode } from "react";
 
 type Step = {
@@ -68,7 +68,19 @@ opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72rem]"
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
         {steps.map((step, id) => (
-          <StepItem key={id} {...step} />
+          <div className="relative flex items-stretch">
+            <StepItem key={id} {...step} />
+
+            {id < steps.length - 1 && (
+              <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                <MoveRight
+                  size={32}
+                  strokeWidth={1}
+                  className="text-rose-400"
+                ></MoveRight>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </section>

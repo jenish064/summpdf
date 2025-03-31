@@ -138,6 +138,10 @@
       background-position: right center;
     }
   }
+
+  .animate-gradient-x {
+    animation: gradient-x 3s ease infinite;
+  }
 }
 
 @utility container {

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   variable: "--font-sans",
@@ -36,6 +37,7 @@ flex-col"
             <main className="flex-1">{children}</main>
             <Footer />I
           </div>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

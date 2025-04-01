@@ -84,7 +84,9 @@ async function savePdfSummary({
   try {
     const sql = await getDbConnection();
     console.log("Connecting to DB", sql);
-    await sql`INSERT INTO pdf_summaries (user_id, original_file_url, summary_text, title, file_name) VALUES (${userId}, ${fileUrl}, ${summary}, ${title}, ${fileName});`;
+    const result =
+      await sql`INSERT INTO pdf_summaries (user_id, original_file_url, summary_text, title, file_name) VALUES (${userId}, ${fileUrl}, ${summary}, ${title}, ${fileName}) RETURNING *;`;
+    return result?.[0] || null;
   } catch (error) {
     console.log("Error saving PDF summary");
     throw error;

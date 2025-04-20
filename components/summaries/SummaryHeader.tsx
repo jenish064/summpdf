@@ -1,7 +1,8 @@
-import Link from "next/link";
-import React from "react";
-import { Button } from "../ui/button";
-import { Badge, Calendar, ChevronLeft, Clock, Sparkles } from "lucide-react";
+import Link from 'next/link';
+import React from 'react';
+import { Button } from '../ui/button';
+import { Calendar, ChevronLeft, Clock, Sparkles } from 'lucide-react';
+import { Badge } from '../ui/badge';
 
 function SummaryHeader({
   title,
@@ -14,18 +15,21 @@ function SummaryHeader({
 }) {
   return (
     <div className="flex gap-4 mb-6 justify-between">
-      <div className="space-y-6">
+      <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-4">
-          <Badge className="relative px-4 py-1.5 text-sm font-medium bg-white/80 backdrop-blur-xs rounded-full hover:bg-white/90 transition-all shadow-xs hover:shadow-md">
+          <Badge
+            variant="secondary"
+            className="relative px-4 py-1.5 text-sm font-medium bg-white/80 backdrop-blur-xs rounded-full hover:bg-white/90 transition-all shadow-xs hover:shadow-md"
+          >
             <Sparkles className="h-4 w-4 mr-1.5 text-rose-500" />
             AI Summary
           </Badge>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4 text-rose-500" />
-            {new Date(createdAt).toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+            {new Date(createdAt).toLocaleDateString('en-us', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             })}
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">

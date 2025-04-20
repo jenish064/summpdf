@@ -1,5 +1,5 @@
-import { BrainCircuit, FileOutput, FileText, MoveRight } from "lucide-react";
-import React, { ReactNode } from "react";
+import { BrainCircuit, FileOutput, FileText, MoveRight } from 'lucide-react';
+import React, { ReactNode } from 'react';
 
 type Step = {
   icon: ReactNode;
@@ -10,20 +10,20 @@ type Step = {
 const steps: Step[] = [
   {
     icon: <FileText size={64} strokeWidth={1.5} />,
-    label: "Upload your PDF",
-    description: "Simply drag and drop your PDF document or click to upload",
+    label: 'Upload your PDF',
+    description: 'Simply drag and drop your PDF document or click to upload',
   },
   {
     icon: <BrainCircuit size={64} strokeWidth={1.5} />,
-    label: "AI Analysis",
+    label: 'AI Analysis',
     description:
-      "Our advanced AI analyzes your PDF and generates a summary instantly",
+      'Our advanced AI analyzes your PDF and generates a summary instantly',
   },
   {
     icon: <FileOutput size={64} strokeWidth={1.5} />,
-    label: "Get summary",
+    label: 'Get summary',
     description:
-      "Receive a clear and concise summary of your document in seconds",
+      'Receive a clear and concise summary of your document in seconds',
   },
 ];
 
@@ -51,7 +51,7 @@ function HowItWorksSection() {
         <div
           style={{
             clipPath:
-              "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+              'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
           }}
           className="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-linear-to-br from-emerald-500 via-teal-500 to-cyan-500
 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72rem]"
@@ -68,7 +68,7 @@ opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72rem]"
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
         {steps.map((step, id) => (
-          <div className="relative flex items-stretch">
+          <div id={`step-${id}`} className="relative flex items-stretch">
             <StepItem key={id} {...step} />
 
             {id < steps.length - 1 && (

@@ -39,7 +39,7 @@ function UploadForm() {
     const serverData = response?.[0]?.serverData;
     const result = await generatePdfSummary({
       fileUrl: serverData.fileUrl,
-      fileName: serverData.name,
+      fileName: serverData.name || serverData.fileName,
     });
     const { data = null, message = null } = result || {};
     // save summary to database
@@ -51,8 +51,10 @@ function UploadForm() {
         const payload = {
           summary: data.summary,
           fileUrl: serverData.fileUrl,
-          title: serverData.name,
-          fileName: `summarized_${serverData.name?.trim()}`,
+          title: serverData.name || serverData.fileName,
+          fileName: `summarized_${(
+            serverData.name || serverData.fileName
+          )?.trim()}`,
         };
         storeResult = await storePdfSummaryAction(payload);
         toast.success("Your PDF has been successfully summarized and saved");

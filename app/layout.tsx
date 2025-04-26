@@ -15,6 +15,16 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "SummPDF",
   description: "Summarize your PDFs with the power of AI!",
+  icons: {
+    icon: "./icon.ico",
+  },
+  openGraph: {
+    images: [{ url: "/opengraph-image.jpg" }],
+  },
+  metadataBase: new URL("https://summ-pdf.vercel.app"),
+  alternates: {
+    canonical: "https://summ-pdf.vercel.app",
+  },
 };
 
 export default function RootLayout({

@@ -39,7 +39,6 @@ export async function generateSummaryFromAI(pdfText: string) {
       ".";
 
     const result = await model.generateContent(prompt);
-    console.log(result.response.text());
     return result.response.text();
   } catch (error: any) {
     if (error?.status === 429) {

@@ -14,11 +14,14 @@ interface PdfSummaryType {
   fileName: string;
 }
 
-export async function generatePdfSummary(uploadResponse: {
-  userId: string;
-  file: { ufsUrl: string; name: string };
+export async function generatePdfSummary({
+  fileUrl,
+  fileName,
+}: {
+  fileUrl: string;
+  fileName: string;
 }) {
-  if (!uploadResponse) {
+  if (!fileUrl) {
     return {
       success: false,
       message: "File upload failed",
@@ -26,12 +29,7 @@ export async function generatePdfSummary(uploadResponse: {
     };
   }
 
-  const {
-    userId,
-    file: { ufsUrl, name },
-  } = uploadResponse;
-
-  if (!ufsUrl) {
+  if (!fileUrl) {
     return {
       success: false,
       message: "File upload failed",
@@ -40,12 +38,11 @@ export async function generatePdfSummary(uploadResponse: {
   }
 
   try {
-    const pdfText = await fetchAndExtractPdfText(ufsUrl);
+    const pdfText = await fetchAndExtractPdfText(fileUrl);
 
     let summary;
     try {
       summary = await generateSummaryFromAI(pdfText);
-      console.log(summary);
     } catch (error) {
       //call gemini
       console.log(error);
@@ -83,12 +80,10 @@ async function savePdfSummary({
   // sql inserting pdf summary
   try {
     const sql = await getDbConnection();
-    console.log("Connecting to DB", sql);
     const result =
       await sql`INSERT INTO pdf_summaries (user_id, original_file_url, summary_text, title, file_name) VALUES (${userId}, ${fileUrl}, ${summary}, ${title}, ${fileName}) RETURNING *;`;
     return result?.[0] || null;
   } catch (error) {
-    console.log("Error saving PDF summary");
     throw error;
   }
 }

@@ -26,7 +26,6 @@ export async function deleteSummaryAction({
     }
     return { success: false };
   } catch (error) {
-    console.log("Error deleting summary", error);
     return { success: false };
   }
 }

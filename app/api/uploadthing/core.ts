@@ -32,7 +32,11 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { userId: metadata.userId, file };
+      return {
+        userId: metadata.userId,
+        fileUrl: file.ufsUrl,
+        fileName: file.name,
+      };
     }),
 } satisfies FileRouter;
 

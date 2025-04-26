@@ -37,7 +37,10 @@ function UploadForm() {
 
     // parse the PDF using 'langchain' & summarize the pdf using AI
     const serverData = response?.[0]?.serverData;
-    const result = await generatePdfSummary(serverData);
+    const result = await generatePdfSummary({
+      fileUrl: serverData.fileUrl,
+      fileName: serverData.name,
+    });
     const { data = null, message = null } = result || {};
     // save summary to database
     if (data) {
@@ -47,9 +50,9 @@ function UploadForm() {
       if (data.summary) {
         const payload = {
           summary: data.summary,
-          fileUrl: serverData.file.ufsUrl,
-          title: serverData.file.name,
-          fileName: `summarized_${serverData.file.name?.trim()}`,
+          fileUrl: serverData.fileUrl,
+          title: serverData.name,
+          fileName: `summarized_${serverData.name?.trim()}`,
         };
         storeResult = await storePdfSummaryAction(payload);
         toast.success("Your PDF has been successfully summarized and saved");
@@ -68,7 +71,6 @@ function UploadForm() {
     // }
     // // for single pdf support
     // const validatedFields = schema.safeParse({ file: files[0] });
-    // console.log("validatedFields", validatedFields);
     // if (!validatedFields.success) return files;
     return files;
   };
